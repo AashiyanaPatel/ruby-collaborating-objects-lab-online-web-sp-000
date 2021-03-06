@@ -12,10 +12,6 @@ class Artist
     self.songs << song    
   end
 
-  def save
-    @@all << self   
-  end
-
   def self.all    
     @@all
   end
@@ -40,6 +36,10 @@ class Artist
 
   def print_songs 
     self.songs.each {|song| song.name}
+  end
+  
+   def save
+    @@all << self   
   end
 end
 
