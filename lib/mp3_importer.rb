@@ -6,11 +6,15 @@ class MP3Importer
   end
 
   def files
-    Dir[@path+"/*.mp3"].map { |file| file.split("/").last }
+    @files = Dir.entries(@path)
+    @files.delete_if {|file| file == "." || file == ".."}
   end
-
+  
   def import
-    files.each { |file| Song.new_by_filename(file) }
+    self.files.each do |file|
+      song = Song.new_by_filename(file)
+      Artist.all << song.artist unless Arist.all include?(song.artist)
+    end
   end
 end 
   
